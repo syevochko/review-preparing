@@ -1,1 +1,48 @@
-{"@odata.context":"https://selectapi.datascope.refinitiv.com/RestApi/v1/$metadata#DataScope.Select.Api.Extractions.ExtractionRequests.ExtractionResult","Contents":[{"IdentifierType":"Ric","Identifier":"WXFP.WA","RIC":null,"Exchange Code":null,"Currency Code":null,"Ticker":null},{"IdentifierType":"Ric","Identifier":"WXFP.WA","RIC":null,"Exchange Code":null,"Currency Code":null,"Ticker":null}],"Notes":["Extraction Services Version 18.2.1.47729 (1e1acc120e4a), Built Sep 25 2024 21:21:17\r\nProcessing started at 11/07/2024 12:26:38.\r\nUser ID: 9028552\r\nExtraction ID: 2000000811053622\r\nCorrelation ID: CiD/9028552/AAAAAA.09276a866b8a9799/RA\r\nSchedule: 0x09276a866b9a9799 (ID = 0x0000000000000000)\r\nInput List (1 items):  (ID = 0x09276a866b9a9799) Created: 11/07/2024 12:26:38 Last Modified: 11/07/2024 12:26:38\r\nReport Template (10 fields): _OnD_0x09276a866b9a9799 (ID = 0x09276a866baa9799) Created: 11/07/2024 12:26:35 Last Modified: 11/07/2024 12:26:35\r\nSchedule dispatched via message queue (0x09276a866b9a9799)\r\nSchedule Time: 11/07/2024 12:26:37\r\nHistorical Reference Date Range: 04/01/2024 to 04/30/2024\r\nProcessing completed successfully at 11/07/2024 12:26:39, taking 0.804 Secs.\r\nExtraction finished at 11/07/2024 12:26:39 UTC, with servers: xc42st7bQ07, DHS (0.3 secs), QSDHA1 (0.0 secs), QSHC06 (0.5 secs)\r\n"]}
+do you know what's that mounts in terms of LSEG Opendacs?
+ChatGPT сказал:
+
+Yes — in LSEG Open DACS, the term “mounts” has a very specific technical meaning.
+
+Here’s a clear explanation 👇
+
+🔹 What “mounts” mean in Open DACS
+
+In the DACS entitlement system, a mount represents a connection instance (or “position”) between a user/application and a data source (service).
+
+Each mount is essentially a login session from an application to a DACS-managed service (for example, an RTDS/TREP feed).
+
+DACS keeps track of all these mounts in order to:
+
+Enforce concurrent login limits (per user or per application).
+
+Monitor usage — who is connected, to what, and from where.
+
+Apply entitlements and permissions correctly.
+
+You can think of a mount as:
+
+“A logical instance of a user consuming real-time data from a specific service, tracked for entitlement and auditing purposes.”
+
+🔹 Examples
+
+If the same user logs into two different market data terminals or applications, DACS will count two mounts for that user.
+
+If one application connects to multiple services (e.g., IDN_RDF and ELEKTRON_EDGE), it will have a mount per service.
+
+If you have a Redistributor App that uses Open DACS, each downstream user connection typically results in a separate mount record for entitlement tracking.
+
+🔹 Why mounts matter
+
+Licensing & compliance: Exchanges often restrict how many simultaneous connections (mounts) a firm or user can have.
+
+Performance management: Too many mounts can indicate unclosed sessions or misbehaving applications.
+
+Auditing & reporting: DACS administrators use mount data to generate entitlement and usage reports.
+
+🔹 Related terms
+
+Position — sometimes used interchangeably with mount; a user “occupies a DACS position” when connected.
+
+Site — a logical grouping of DACS components; mounts belong to a particular site.
+
+Mount table — a DACS table showing all active connections (mounts), including user ID, application ID, service, and session state.
